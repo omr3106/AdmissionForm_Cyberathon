@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Student</title>
+    <style>
+        body { font-family: "Segoe UI", sans-serif; background: #ecf0f1; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .form-box { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 400px; }
+        h2 { color: #2980b9; margin-top: 0; }
+        input, select { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .btn-save { width: 100%; padding: 10px; background: #27ae60; color: white; border: none; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        .btn-cancel { background: #7f8c8d; margin-top: 10px; }
+        .msg { padding: 10px; background: #f8d7da; color: #721c24; margin-bottom: 10px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="form-box">
+        <h2>Edit Student Record</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="msg">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label>Full Name</label>
+            <input type="text" name="name" value="{{ student.Name }}" required>
+
+            <label>Email</label>
+            <input type="text" name="email" value="{{ student.Email }}" required>
+
+            <label>Contact</label>
+            <input type="text" name="contact" value="{{ student.Contact }}" required>
+
+            <label>Gender</label>
+            <select name="gender">
+                <option value="Male" {% if student.Gender == 'Male' %}selected{% endif %}>Male</option>
+                <option value="Female" {% if student.Gender == 'Female' %}selected{% endif %}>Female</option>
+            </select>
+
+            <label>Stream</label>
+            <select name="stream">
+                <option value="Science" {% if student.Stream == 'Science' %}selected{% endif %}>Science</option>
+                <option value="Arts" {% if student.Stream == 'Arts' %}selected{% endif %}>Arts</option>
+                <option value="Commerce" {% if student.Stream == 'Commerce' %}selected{% endif %}>Commerce</option>
+            </select>
+
+            <button type="submit" class="btn-save">Save Changes</button>
+        </form>
+        
+        <a href="{% url 'home' %}"><button class="btn-save btn-cancel">Cancel</button></a>
+    </div>
+
+</body>
+</html>

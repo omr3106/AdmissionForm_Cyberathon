@@ -1,0 +1,12 @@
+# Security: NEVER upload this
+serviceAccountKey.json
+
+# Python junk
+__pycache__/
+*.pyc
+
+# Database (Local)
+db.sqlite3
+
+# OS junk
+.DS_Store
